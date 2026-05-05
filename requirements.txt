@@ -1,0 +1,8 @@
+flask
+deepface
+opencv-python
+python-dotenv
+tf-keras
+numpy
+pillow
+requests

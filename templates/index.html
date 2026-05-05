@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emotion Based Music Recommendation System — AI powered Bollywood playlists matching your mood.">
+    <title>Emotion Based Music Recommendation System</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=20260505">
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══════════════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <div class="brand-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+                <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+        </div>
+        <span class="brand-text">EmotionMusic</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="home">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item" data-page="capture">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span>Capture Emotion</span>
+        </a>
+        <a href="#" class="nav-item" data-page="upload">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>Upload Photo</span>
+        </a>
+        <a href="#" class="nav-item" data-page="mood">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            <span>Select Mood</span>
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-footer-title">Emotion Based Music<br>Recommendation System</div>
+        <div class="sidebar-footer-sub">AI Powered Bollywood Playlists</div>
+    </div>
+</aside>
+
+<!-- ══ MAIN CONTENT ══════════════════════════════════════════════════════════ -->
+<main class="main-content" id="mainContent">
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle sidebar">
+                <span></span><span></span><span></span>
+            </button>
+            <h2 class="page-title" id="pageTitle">Discover Your Vibe</h2>
+        </div>
+        <div class="top-bar-right">
+            <div class="user-avatar">🎵</div>
+        </div>
+    </header>
+
+    <div class="page-container" id="pageContainer">
+
+        <!-- HOME PAGE -->
+        <section class="page active" id="page-home">
+            <div class="hero-section">
+                <h1 class="hero-title">Welcome to the Emotion Based<br>Music Recommendation System</h1>
+                <p class="hero-subtitle">Let your face decide your playlist. Instant Bollywood music matching your mood.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="heroStartCamera">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        Start Camera
+                    </button>
+                    <button class="btn btn-outline" id="heroChooseMood">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                        Choose Mood
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detected Mood Card -->
+            <div class="mood-result-section" id="moodResultSection" style="display:none;">
+                <div class="mood-card">
+                    <div class="mood-card-header">DETECTED MOOD</div>
+                    <div class="mood-card-content">
+                        <div class="mood-emoji" id="moodEmoji">😊</div>
+                        <div class="mood-info">
+                            <div class="mood-name" id="moodName">Happy</div>
+                            <div class="mood-confidence" id="moodConfidence">Confidence: 95.0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Playlist -->
+            <div class="playlist-section" id="playlistSection" style="display:none;">
+                <div class="playlist-header">
+                    <h2 class="playlist-title">🎵 Your Playlist</h2>
+                    <button class="btn btn-small btn-outline" id="refreshPlaylist">🔄 Refresh</button>
+                </div>
+                <div class="song-list" id="songList"></div>
+            </div>
+        </section>
+
+        <!-- CAPTURE PAGE -->
+        <section class="page" id="page-capture">
+            <div class="capture-section">
+                <h2 class="section-title">📷 Capture Your Emotion</h2>
+                <p class="section-desc">Camera starts automatically here. Tap once to capture, detect emotion, and get songs instantly.</p>
+                <div class="camera-container" id="cameraContainer">
+                    <video id="cameraFeed" autoplay playsinline></video>
+                    <canvas id="cameraCanvas" style="display:none;"></canvas>
+                    <div class="camera-overlay"><div class="camera-circle"></div></div>
+                </div>
+                <div class="capture-controls">
+                    <button class="btn btn-primary" id="startCameraBtn">📷 Start Camera</button>
+                    <button class="btn btn-primary" id="captureBtn">🎯 Capture &amp; Detect</button>
+                </div>
+                <div class="detection-status" id="detectionStatus" style="display:none;">
+                    <div class="status-spinner"></div><span>Detecting emotion...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPLOAD PAGE -->
+        <section class="page" id="page-upload">
+            <div class="upload-section">
+                <h2 class="section-title">🖼️ Upload a Photo</h2>
+                <p class="section-desc">Upload a clear, front-facing photo. We'll detect your emotion from it.</p>
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                    </div>
+                    <p class="upload-text">Drag &amp; drop your photo here or <span class="upload-browse">browse</span></p>
+                    <p class="upload-hint">JPG, JPEG, PNG — max 10MB</p>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png" hidden>
+                </div>
+                <div class="upload-preview" id="uploadPreview" style="display:none;">
+                    <img id="previewImage" alt="Preview">
+                    <button class="btn btn-primary" id="analyzeUploadBtn">🔍 Analyze Emotion</button>
+                    <button class="btn btn-outline" id="uploadResetBtn" style="margin-left:10px;">↩ Try Another</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOOD SELECT PAGE -->
+        <section class="page" id="page-mood">
+            <div class="mood-section">
+                <h2 class="section-title">😊 Choose Your Mood</h2>
+                <p class="section-desc">Tell us how you're feeling and we'll build a Bollywood playlist instantly.</p>
+                <div class="mood-grid">
+                    <button class="mood-option" data-emotion="happy"><span class="mood-option-emoji">😊</span><span class="mood-option-label">Happy</span></button>
+                    <button class="mood-option" data-emotion="sad"><span class="mood-option-emoji">😢</span><span class="mood-option-label">Sad</span></button>
+                    <button class="mood-option" data-emotion="angry"><span class="mood-option-emoji">😠</span><span class="mood-option-label">Angry</span></button>
+                    <button class="mood-option" data-emotion="fear"><span class="mood-option-emoji">😨</span><span class="mood-option-label">Fear</span></button>
+                    <button class="mood-option" data-emotion="neutral"><span class="mood-option-emoji">😐</span><span class="mood-option-label">Neutral</span></button>
+                    <button class="mood-option" data-emotion="surprise"><span class="mood-option-emoji">😲</span><span class="mood-option-label">Surprise</span></button>
+                    <button class="mood-option" data-emotion="disgust"><span class="mood-option-emoji">🤢</span><span class="mood-option-label">Disgust</span></button>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /page-container -->
+</main>
+
+<!-- ══ NOW PLAYING BAR ═══════════════════════════════════════════════════════ -->
+<div class="player-bar" id="playerBar" style="display:none;">
+    <div class="player-song-info">
+        <div class="player-album-art">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+        </div>
+        <div class="player-song-details">
+            <div class="player-song-name" id="playerSongName">No song selected</div>
+            <div class="player-song-artist" id="playerSongArtist">—</div>
+        </div>
+    </div>
+    <div class="player-center">
+        <span class="player-open-label">Opens on YouTube →</span>
+    </div>
+    <div class="player-right">
+        <a class="btn btn-small btn-primary" id="openYouTubeBtn" href="#" target="_blank" rel="noopener noreferrer">
+            ▶ Open in YouTube
+        </a>
+    </div>
+</div>
+
+<script src="/static/js/app.js?v=20260505"></script>
+</body>
+</html>
