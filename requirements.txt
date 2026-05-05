@@ -1,8 +1,8 @@
 flask
 deepface
-opencv-python
+opencv-python-headless
 python-dotenv
-tensorflow-cpu==2.10.0
+tf-keras
 numpy
 pillow
 requests
