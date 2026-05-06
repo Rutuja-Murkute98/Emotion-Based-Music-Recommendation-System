@@ -9,6 +9,9 @@ import os
 import sys
 from concurrent.futures import ThreadPoolExecutor
 
+# DeepFace still expects legacy TensorFlow/Keras behavior on many hosted builds.
+os.environ.setdefault('TF_USE_LEGACY_KERAS', '1')
+
 import cv2
 import numpy as np
 from dotenv import load_dotenv
